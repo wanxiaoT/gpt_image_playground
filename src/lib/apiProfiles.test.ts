@@ -21,6 +21,15 @@ afterEach(() => {
   vi.unstubAllEnvs()
 })
 
+describe('default OpenAI API URL', () => {
+  it('uses naapi as the built-in OpenAI-compatible default', () => {
+    expect(DEFAULT_SETTINGS.baseUrl).toBe('https://naapi.cc/v1')
+    expect(createDefaultOpenAIProfile().baseUrl).toBe('https://naapi.cc/v1')
+    expect(DEFAULT_SETTINGS.profiles[0].name).toBe('钠api')
+    expect(createDefaultOpenAIProfile().name).toBe('钠api')
+  })
+})
+
 describe('validateApiProfile', () => {
   it('allows empty API URL when API proxy is enabled and available', () => {
     vi.stubEnv('VITE_API_PROXY_AVAILABLE', 'true')
